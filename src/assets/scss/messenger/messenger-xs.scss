@@ -1,0 +1,226 @@
+@use '../variables' as vars;
+
+@media only screen and (max-width:414px) {
+
+  .messenger-btn {
+    width: 8vw;
+    height: 8vw;
+    border-radius: 1.33vw;
+    margin: 0 0 0 1.3vw;
+    svg {
+      width: 3.47vw;
+      height: 3.47vw;
+    }
+  }
+  html[lang="ar"] .messenger-btn {
+    margin: 0 1.3vw 0 0;
+  }
+
+  .messenger__messages-count {
+    right: -1.067vw;
+    font-size: 2.4vw;
+    padding: 0.55vw 1.067vw;
+    border-radius: 2.67vw;
+  }
+  html[lang="ar"] .messenger__messages-count {
+    right: auto;
+    left: -1.067vw;
+  }
+  
+  .kc-messenger__background {
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .kc-messenger__top {
+    width: 100vw;
+    height: 18.67vw;
+    padding: 5.33vw;
+  }
+  
+  .kc-messenger__wrap {
+    width: 200vw;
+    height: calc(100vh - 18.67vw);
+    transition: .3s transform
+  }
+  .kc-messenger__wrap.active {
+    transform: translateX(-50%);
+  }
+  html[lang="ar"] .kc-messenger__wrap.active {
+    transform: translateX(50%);
+  }
+  
+  .kc-messenger__contacts {
+    max-height: calc(100vh - 18.67vw);
+    width: 100vw;
+  }
+  
+  .kc-messenger__contacts-list {
+    width: 100vw;
+  }
+   
+  .kc-messenger__contact {
+    padding: 3.2vw 14.67vw 3.2vw 3.2vw;
+    &:not(:last-child) {
+      &:after {
+        width: 74.13vw;
+        height: 1px;
+      }
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact {
+    padding: 3.2vw 3.2vw 3.2vw 14.67vw;
+  }
+  
+  .kc-messenger__contact-avatar {
+    width: 13.33vw;
+    height: 13.33vw;
+    margin: 0 2.67vw 0 0;
+    border-radius: 1.33vw;
+    img {
+      margin: 0 2.67vw 0 0;
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact-avatar {
+    margin: 0 0 0 2.67vw;
+    img {
+      margin: 0 0 0 2.67vw;
+    }
+  }
+  
+  .kc-messenger__contact-name {
+    font-size: 3.73vw;
+    margin: 0 0 1.33vw 0;
+    padding: 0 2.67vw 0 0;
+    max-width: 70vw;
+    .status {
+      width: 1.33vw;
+      height: 1.33vw;
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact-name {
+    padding: 0 0 0 2.67vw;
+  }
+  
+  .kc-messenger__contact-msg {
+    font-size: 2.93vw;
+  }
+  
+  .kc-messenger__contact-msg-count {
+    font-size: 2.4vw;
+    padding: 0.8vw 1.33vw;
+    border-radius: 2.67vw;
+    top: 2.67vw;
+    right: 2.67vw;
+  }
+  html[lang="ar"] .kc-messenger__contact-msg-count {
+    left: 2.67vw;
+  }
+  
+  .kc-messenger__contact-time {
+    right: 2.93vw;
+    bottom: 3.2vw;
+    font-size: 2.93vw;
+  }
+  html[lang="ar"] .kc-messenger__contact-time {
+    left: 2.93vw;
+  }
+  
+  .kc-messenger__message {
+    margin: 0 0 2.67vw 0;
+  }
+  
+  .kc-messenger__message-avatar {
+    width: 8vw;
+    height: 8vw;
+    margin: 0 2.67vw 0 0;
+    border-radius: 1.33vw;
+    img {
+      border-radius: 1.33vw;
+    }
+  }
+  html[lang="ar"] .kc-messenger__message-avatar {
+    margin: 0 0 0 2.67vw;
+  }
+  
+  .kc-messenger__message-msg {
+    font-size: 3.2vw;
+  }
+  
+  .kc-messenger__message-name {
+    font-size: 3.2vw;
+  }
+  
+  .kc-messenger__message-time {
+    font-size: 2.67vw;
+    margin: 0 0 0 1.33vw;
+  }
+  
+  .kc-messenger__messages {
+    max-height: calc(100vh - 40vw);
+    padding: 5.33vw 5.33vw 5.33vw 0;
+  }
+  html[lang="ar"] .kc-messenger__messages {
+    padding: 5.33vw 0 5.33vw 5.33vw;
+  }
+  
+  .kc-messenger__message-wrap {
+    padding: 18vw 7.47vw 5.33vw 5.33vw;
+  }
+  html[lang="ar"] .kc-messenger__message-wrap {
+    padding: 18vw 5.33vw 5.33vw 7.47vw;
+  }
+
+  .kc-messenger__back-btn {
+    display: inline-block;
+    position: absolute;
+    top: 5.5vw;
+    left: 105vw;
+    z-index: 9;
+  }
+  html[lang="ar"] .kc-messenger__back-btn {
+    left: auto;
+    right: 105vw;
+    svg {
+      transform: scale(-1,1)
+    }
+  }
+  
+  .kc-messenger__message-date {
+    font-size: 3.2vw;
+    border-radius: 1.33vw;
+    padding: 1.067vw 2.4vw;
+    margin: 0 0 5.33vw 0;
+    &:after {
+      width: 40vw;
+    }
+  }
+  
+  .kc-messenger__message-new {
+    font-size: 2.4vw;
+    border-radius: 0.8vw;
+    padding: 0.53vw 1.33vw;
+    margin: 0 0 5.33vw 0;
+    &:after {
+      width: 66.67vw;
+    }
+  }
+  
+  .kc-messenger__message-field {
+    padding: 2.67vw 0 0 0;
+    textarea {
+      font-size: 3.73vw;
+      height: 8vw;
+      margin: 0 2.67vw 0 0;
+      padding: 0.8vw 2.4vw;
+      border-radius: 1.067vw;
+    }
+  }
+  html[lang="ar"] .kc-messenger__message-field {
+    textarea {
+      margin: 0 0 0 2.67vw;
+    }
+  }
+  
+}

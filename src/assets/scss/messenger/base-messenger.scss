@@ -1,0 +1,403 @@
+@use '../variables' as vars;
+
+.messenger-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid vars.$color-middle-grey;
+  border-radius: 5px;
+  position: relative;
+  background: none;
+  margin: 0 0 0 10px;
+  transition: .15s background-color;
+  &:hover {
+    background-color: #d2d7da75;
+  }
+  svg {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: vars.$color-grey;
+  }
+}
+html[lang="ar"] .messenger-btn {
+  margin: 0 10px 0 0;
+  svg {
+    transform: translate(-50%,-50%) scale(-1,1);
+  }
+}
+
+.messenger__messages-count {
+  position: absolute;
+  top: 1px;
+  right: -4px;
+  font-size: 9px;
+  line-height: 1;
+  background-color: vars.$color-orange;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 10px;
+}
+html[lang="ar"] .messenger__messages-count {
+  right: auto;
+  left: -4px;
+}
+
+.kc-messenger__background {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(116, 131, 138, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+}
+
+.kc-messenger__content-wrap {
+  background: #fff;
+  height: 100vh;
+}
+
+.kc-messenger__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 20px;
+}
+
+.kc-messenger__wrap {
+  display: flex;
+  width: 1100px;
+  height: calc(100vh - 70px);
+  border-top: 1px solid vars.$color-grey-fade;
+}
+
+.kc-messenger__contacts {
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.kc-messenger__contacts-list {
+  width: 350px;
+  flex: none;
+  overflow: hidden;
+  position: relative;
+  border-right: 1px solid vars.$color-grey-fade;
+}
+html[lang="ar"] .kc-messenger__contacts-list {
+  border-right: none;
+  border-left: 1px solid vars.$color-grey-fade;
+}
+ 
+.kc-messenger__contact {
+  display: flex;
+  padding: 12px 55px 12px 12px;
+  position: relative;
+  text-decoration: none;
+  transition: .1s background-color;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+  &:not(:last-child) {
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 278px;
+      height: 1px;
+      background-color: vars.$color-grey-fade;
+      bottom: -1px;
+      right: 0;
+    }
+  }
+  &:hover {
+    background-color: vars.$color-grey-fade;
+  }
+  &.active {
+    background-color: vars.$color-orange-fade;
+    &:after {
+      display: none;
+    }
+  }
+}
+html[lang="ar"] .kc-messenger__contact {
+  padding: 12px 12px 12px 55px;
+  &:not(:last-child) {
+    &:after {
+      right: auto;
+      left: 0;
+    }
+  }
+}
+
+.kc-messenger__contact-avatar {
+  flex: none;
+  width: 50px;
+  height: 50px;
+  margin: 0 10px 0 0;
+  border-radius: 5px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0 10px 0 0;
+  }
+}
+html[lang="ar"] .kc-messenger__contact-avatar {
+  margin: 0 0 0 10px;
+  img {
+    margin: 0 0 0 10px;
+  }
+}
+
+.kc-messenger__contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.kc-messenger__contact-name {
+  display: inline-block;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 700;
+  color: vars.$color-base;
+  margin: 0 0 5px 0;
+  padding: 0 10px 0 0;
+  width: auto;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  .status {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: vars.$color-passed;
+  }
+}
+html[lang="ar"] .kc-messenger__contact-name {
+  padding: 0 0 0 10px;
+  .status {
+    right: auto;
+    left: 0;
+  }
+}
+
+.kc-messenger__contact-msg {
+  font-size: 11px;
+  line-height: 1.45;
+  color: vars.$color-grey;
+}
+
+.kc-messenger__contact-msg-count {
+  display: inline-block;
+  font-size: 9px;
+  line-height: 1.11;
+  padding: 3px 5px;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: vars.$color-orange;
+  color: #fff;
+}
+html[lang="ar"] .kc-messenger__contact-msg-count {
+  right: auto;
+  left: 10px;
+}
+
+.kc-messenger__contact-time {
+  position: absolute;
+  right: 11px;
+  bottom: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: vars.$color-grey;
+}
+html[lang="ar"] .kc-messenger__contact-time {
+  right: auto;
+  left: 11px;
+}
+
+.kc-messenger__message {
+  display: flex;
+  align-items: flex-start;
+  word-wrap: break-word;
+  margin: 0 0 10px 0;
+}
+
+.kc-messenger__message-avatar {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  margin: 0 10px 0 0;
+  border-radius: 5px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+html[lang="ar"] .kc-messenger__message-avatar {
+  margin: 0 0 0 10px;
+}
+
+.kc-messenger__message-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.kc-messenger__message-msg {
+  font-size: 12px;
+  line-height: 1.5;
+  a {
+    color: vars.$color-grey;
+    transition: .15s opacity;
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+
+.kc-messenger__message-name {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: vars.$color-base;
+}
+
+.kc-messenger__message-time {
+  font-size: 10px;
+  line-height: 1.5;
+  color: vars.$color-grey;
+  margin: 0 0 0 5px;
+}
+
+.kc-messenger__messages {
+  max-height: calc(100vh - 150px);
+  padding: 20px 20px 20px 0;
+  overflow-y: auto;
+}
+html[lang="ar"] .kc-messenger__messages {
+  padding: 20px 0 20px 20px;
+}
+
+.kc-messenger__message-wrap {
+  min-width: 0;
+  flex: 1;
+  padding: 0 28px 20px 20px;
+  margin-top: auto;
+  // position: relative;
+}
+html[lang="ar"] .kc-messenger__message-wrap {
+  padding: 0 20px 20px 28px;
+}
+
+.kc-messenger__back-btn {
+  display: none;
+}
+
+.kc-messenger__message-date {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  background-color: vars.$color-grey-fade;
+  color: vars.$color-grey;
+  border-radius: 5px;
+  padding: 4px 9px;
+  margin: 0 0 20px 0;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 100%;
+    height: 1px;
+    width: 400px;
+    background: linear-gradient(90deg, vars.$color-grey-fade 0%, #fff 100%);
+  }
+}
+html[lang="ar"] .kc-messenger__message-date {
+  &:after {
+    left: auto;
+    right: 100%;
+    background: linear-gradient(270deg, vars.$color-grey-fade 0%, #fff 100%);
+  }
+}
+
+.kc-messenger__message-new {
+  display: inline-block;
+  font-size: 9px;
+  line-height: 1.33;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: vars.$color-orange;
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin: 0 0 20px 0;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 100%;
+    height: 1px;
+    width: 500px;
+    background: linear-gradient(90deg, vars.$color-orange 0%, #fff 100%);
+  }
+}
+html[lang="ar"] .kc-messenger__message-new {
+  &:after {
+    left: auto;
+    right: 100%;
+    background: linear-gradient(270deg, vars.$color-orange 0%, #fff 100%);
+  }
+} 
+
+.kc-messenger__message-field {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0 0 0;
+  width: 100%;
+  textarea {
+    font-size: 14px;
+    line-height: 1.5;
+    height: 30px;
+    max-height: 100px;
+    flex: 1;
+    margin: 0 10px 0 0;
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 1px solid vars.$color-middle-grey;
+    resize: none;
+  }
+}
+html[lang="ar"] .kc-messenger__message-field {
+  textarea {
+    margin: 0 0 0 10px;
+  }
+}

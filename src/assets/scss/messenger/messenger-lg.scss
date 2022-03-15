@@ -1,0 +1,192 @@
+@use '../variables' as vars;
+
+@media only screen and (max-width:1340px) {
+
+  .messenger-btn {
+    width: 2.24vw;
+    height: 2.24vw;
+    border-radius: 0.37vw;
+    margin: 0 0 0 0.746vw;
+    svg {
+      width: 0.97vw;
+      height: 0.97vw;
+    }
+  }
+  html[lang="ar"] .messenger-btn {
+    margin: 0 0.746vw 0 0;
+  }
+
+  .messenger__messages-count {
+    right: -0.3vw;
+    font-size: 0.672vw;
+    padding: 0.15vw 0.3vw;
+    border-radius: 0.746vw;
+  }
+  html[lang="ar"] .messenger__messages-count {
+    right: auto;
+    left: -0.3vw;
+  }
+  
+  .kc-messenger__top {
+    height: 5.224vw;
+    padding: 1.49vw;
+  }
+  
+  .kc-messenger__wrap {
+    width: 82.09vw;
+    height: calc(100vh - 5.22vw);
+  }
+  
+  .kc-messenger__contacts {
+    max-height: calc(100vh - 5.22vw);
+  }
+  
+  .kc-messenger__contacts-list {
+    width: 26.12vw;
+  }
+  
+  .kc-messenger__contact {
+    padding: 0.896vw 4.1vw 0.896vw 0.896vw;
+    &:not(:last-child) {
+      &:after {
+        width: 20.746vw;
+      }
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact {
+    padding: 0.896vw 0.896vw 0.896vw 4.1vw;
+  }
+  
+  .kc-messenger__contact-avatar {
+    width: 3.73vw;
+    height: 3.73vw;
+    margin: 0 0.746vw 0 0;
+    border-radius: 0.37vw;
+    img {
+      margin: 0 0.746vw 0 0;
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact-avatar {
+    margin: 0 0 0 0.746vw;
+    img {
+      margin: 0 0 0 0.746vw;
+    }
+  }
+  
+  .kc-messenger__contact-name {
+    font-size: 1.045vw;
+    margin: 0 0 0.37vw 0;
+    padding: 0 0.746vw 0 0;
+    max-width: 14.925vw;
+    .status {
+      width: 0.37vw;
+      height: 0.37vw;
+    }
+  }
+  html[lang="ar"] .kc-messenger__contact-name {
+    padding: 0 0 0 0.746vw;
+  }
+  
+  .kc-messenger__contact-msg {
+    font-size: 0.82vw;
+  }
+  
+  .kc-messenger__contact-msg-count {
+    font-size: 0.67vw;
+    padding: 0.224vw 0.37vw;
+    border-radius: 0.746vw;
+    top: 0.746vw;
+    right: 0.746vw;
+  }
+  html[lang="ar"] .kc-messenger__contact-msg-count {
+    left: 0.746vw;
+  }
+  
+  .kc-messenger__contact-time {
+    right: 0.82vw;
+    bottom: 0.896vw;
+    font-size: 0.82vw;
+  }
+  html[lang="ar"] .kc-messenger__contact-time {
+    left: 0.82vw;
+  }
+  
+  .kc-messenger__message {
+    margin: 0 0 0.746vw 0;
+  }
+  
+  .kc-messenger__message-avatar {
+    margin: 0 0.746vw 0 0;
+    width: 2.24vw;
+    height: 2.24vw;
+    border-radius: 0.37vw;
+  }
+  html[lang="ar"] .kc-messenger__message-avatar {
+    margin: 0 0 0 0.746vw;
+  }
+  
+  .kc-messenger__message-msg {
+    font-size: 0.896vw;
+  }
+  
+  .kc-messenger__message-name {
+    font-size: 0.896vw;
+  }
+  
+  .kc-messenger__message-time {
+    font-size: 0.746vw;
+    margin: 0 0 0 0.37vw;
+  }
+  
+  .kc-messenger__messages {
+    max-height: calc(100vh - 11.19vw);
+    padding: 1.49vw 1.49vw 1.49vw 0;
+  }
+  html[lang="ar"] .kc-messenger__messages {
+    padding: 1.49vw 0 1.49vw 1.49vw;
+  }
+  
+  .kc-messenger__message-wrap {
+    padding: 0 2.09vw 1.49vw 1.49vw;
+  }
+  html[lang="ar"] .kc-messenger__message-wrap {
+    padding: 0 1.49vw 1.49vw 2.09vw;
+  }
+  
+  .kc-messenger__message-date {
+    font-size: 0.896vw;
+    border-radius: 0.37vw;
+    padding: 0.3vw 0.67vw;
+    margin: 0 0 1.49vw 0;
+    &:after {
+      width: 29.85vw;
+    }
+  }
+  
+  .kc-messenger__message-new {
+    font-size: 0.67vw;
+    border-radius: 0.224vw;
+    padding: 0.15vw 0.37vw;
+    margin: 0 0 1.49vw 0;
+    &:after {
+      width: 37.31vw;
+    }
+  }
+  
+  .kc-messenger__message-field {
+    padding: 0.746vw 0 0 0;
+    textarea {
+      font-size: 1.045vw;
+      height: 2.24vw;
+      margin: 0 0.746vw 0 0;
+      padding: 0.224vw 0.67vw;
+      border-radius: 0.3vw;
+    }
+  }
+  html[lang="ar"] .kc-messenger__message-field {
+    textarea {
+      margin: 0 0 0 0.746vw;
+    }
+  }
+  
+}

@@ -1,0 +1,48 @@
+$color-base: #2C3E46;
+$color-grey: #74838a;
+$color-dark-grey: #3f454a;
+$color-grey-fade: #eaeff3;
+$color-light-grey: #cdd8e1;
+$color-middle-grey: #CCD5DD;
+$color-edge-grey: #697177;
+$color-light-fade: #F3F7F9;
+$color-middle-fade: #ebedee;
+$color-orange-fade: #FFEDDC;
+$color-uplifting-green: #35C04C;
+
+$color-passed: #35c04c;
+$color-orange: #ff881a;
+$color-pale-orange: #ffeddc;
+$color-switch-orange: #ff6f00;
+$color-feautured: #8543da;
+$color-action: #ff881a;
+$color-dark-orange: #e77407;
+$color-primary: #0052cc;
+$color-warning: #ffd417;
+$color-danger: #f03e3e;
+$color-dull-red: #FFF0F0;
+$color-link: #4a69be;
+
+// Aliases
+$color-action: $color-orange;
+$color-success: $color-uplifting-green;
+$color-default: $color-edge-grey;
+
+$base-padding: 4px;
+$base-radius: 5px;
+$base-font-size: 14px;
+
+@media only screen and (max-width:1340px) {
+    $base-padding: 0.3vw;
+    $base-font-size: 1.045vw
+}
+
+@media only screen and (max-width:1024px) {
+    $base-padding: 0.52vw;
+    $base-font-size: 1.82vw;
+}
+
+@media only screen and (max-width:414px) {
+    $base-padding: 1.067vw;
+    $base-font-size: 3.73vw;
+}

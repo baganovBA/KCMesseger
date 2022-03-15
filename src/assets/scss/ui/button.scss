@@ -1,0 +1,282 @@
+@use '../variables' as vars;
+
+.kc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 16px;
+  margin: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  background: none;
+  position: relative;
+  font-weight: 600;
+  font-size: vars.$base-font-size;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  transition: .15s background-color;
+  &.grey {
+    color: vars.$color-grey;
+    transition: .15s opacity;
+    &:hover {
+      opacity: .8;
+    }
+  }
+  svg {
+    height: 12px;
+    width: auto;
+    flex: none;
+    margin: 0 8px 0 0;
+  }
+  &.is-loading {
+    color: transparent !important;
+    --l-size: 16px;
+    --l-boarder: 2px;
+
+    &::after,
+    &::before {
+      position: absolute;
+      content: '';
+      border-radius: 50%;
+      width: var(--l-size);
+      height: var(--l-size);
+      border: var(--l-boarder) solid vars.$color-orange;
+
+      top:  calc(57% - (var(--l-size)/2) - var(--l-boarder));
+      left: calc(50% - (var(--l-size)/2) - var(--l-boarder));
+      width: var(--l-size) ;
+      height: var(--l-size) ;
+    }
+    &::before {
+      border: var(--l-boarder) solid vars.$color-grey;
+      opacity: 0.3;
+    }
+    &::after {
+      border: var(--l-boarder) solid vars.$color-dark-orange;
+      border-top-color: transparent !important;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      animation: spin 500ms linear infinite;
+    }
+  }
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &.kc-btn-block {
+    display: block;
+    width: 100%;
+  }
+}
+html[lang="ar"] .kc-btn {
+  svg {
+    margin: 0 0 0 8px;
+  }
+}
+
+.kc-btn-press-enter {
+  svg {
+    margin: 0 0 0 5px;
+  }
+}
+html[lang="ar"] .kc-btn-press-enter {
+  svg {
+    margin: 0 5px 0 0;
+  }
+}
+
+// Type: link
+.kc-btn-link {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  &:hover {
+    color: vars.$color-dark-grey;
+    background: #d2d7da75;
+  }
+}
+
+// Type: default
+.kc-btn-default {
+  border-color: vars.$color-light-grey;
+  background: #fff;
+  color: vars.$color-dark-grey;
+  &:hover {
+    background: vars.$color-light-fade;
+  }
+  &:active {
+    background: #dbdfe0;
+  }
+}
+
+// Type: action
+.kc-btn-action {
+  background: vars.$color-orange;
+  color: #fff;
+  &:hover {
+    background: lighten(vars.$color-dark-orange, 5%);
+  }
+  &:active {
+    background: lighten(vars.$color-dark-orange, 8%);
+  }
+
+  &.is-disabled {
+    background: vars.$color-light-fade;
+    color: vars.$color-middle-grey;
+    border-color: vars.$color-middle-grey;
+    opacity: 1;
+  }
+}
+
+
+// Type: primary
+.kc-btn-primary {
+  background: vars.$color-primary;
+  color: #fff;
+  &:hover {
+    background: darken(vars.$color-primary, 5%);
+  }
+  &:active {
+    background: darken(vars.$color-success, 8%);
+  }
+}
+
+
+
+
+// Type: success
+.kc-btn-success {
+  background: vars.$color-success;
+  color: #fff;
+  &:hover {
+    background: darken(vars.$color-success, 5%);
+  }
+  &:active {
+    background: darken(vars.$color-success, 8%);
+  }
+}
+
+// Type: warning
+.kc-btn-warning {
+  background: vars.$color-warning;
+  color: vars.$color-dark-grey;
+  &:hover {
+    background: darken(vars.$color-warning, 5%);
+  }
+  &:active {
+    background: darken(vars.$color-warning, 8%);
+  }
+}
+
+// Type: danger
+.kc-btn-danger {
+  background: vars.$color-danger;
+  color: #fff;
+  &:hover {
+    background: darken(vars.$color-danger, 5%);
+  }
+  &:active {
+    background: darken(vars.$color-danger, 8%);
+  }
+}
+
+
+.kc-btn-action,
+.kc-btn-primary,
+.kc-btn-success,
+.kc-btn-warning,
+.kc-btn-danger {
+    &.is-loading {
+    &::before {
+      border-color:#fff;
+      opacity: 0.2;
+    }
+    &::after {
+      border-color:#fff;
+    }
+  }
+}
+
+
+@media only screen and (max-width:1340px) {
+
+  .kc-btn {
+    font-size: 1.045vw;
+    padding: 0.52vw 1.194vw;
+    svg {
+      height: 0.896vw;
+      margin: 0 0.6vw 0 0;
+    }
+    &.is-loading {
+      font-size: 1.045vw;
+    }
+  }
+  html[lang="ar"] .kc-btn {
+    svg {
+      margin: 0 0 0 0.6vw;
+    }
+  }
+
+  .kc-btn-press-enter {
+    svg {
+      margin: 0 0 0 0.37vw;
+    }
+  }
+  html[lang="ar"] .kc-btn-press-enter {
+    svg {
+      margin: 0 0.37vw 0 0;
+    }
+  }
+
+}
+
+@media only screen and (max-width:1024px) {
+
+  .kc-btn {
+    font-size: 1.85vw;
+    padding: 0.91vw 2.083vw;
+    svg {
+      height: 1.563vw;
+      margin: 0 1.04vw 0 0;
+    }
+    &.is-loading {
+      --l-size: 1.85vw;
+    }
+  }
+  html[lang="ar"] .kc-btn {
+    svg {
+      margin: 0 0 0 1.04vw;
+    }
+  }
+
+  .kc-btn-press-enter {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width:414px) {
+
+  .kc-btn {
+    padding: 1.87vw 4.27vw;
+    font-size: 3.73vw;
+    svg {
+      height: 3.2vw;
+      margin: 0 2.13vw 0 0;
+    }
+    &.is-loading {
+      --l-size: 3.73vw;
+    }
+  }
+  html[lang="ar"] .kc-btn {
+    svg {
+      margin: 0 0 0 2.13vw;
+    }
+  }
+
+}
