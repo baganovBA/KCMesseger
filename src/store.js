@@ -14,6 +14,12 @@ export const timeout = writable(60000)
 
 export const selected_chat =writable('')
 
+export const roomsMessages = writable({})
+
+export const chats = writable([]);
+export const joined_chats_rooms = syncJoinedRooms()
+
+
 function syncJoinedRooms(){
     const { subscribe, set, update } = writable([]);
 
@@ -38,5 +44,3 @@ function syncChats() {
 }
 
 
-export const chats = writable([]);
-export const joined_chats_rooms = syncJoinedRooms()

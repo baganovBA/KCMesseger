@@ -12,9 +12,11 @@
     api_user_guid,
     joined_chats_rooms,
     matrix_server, matrix_user_guid,
-    account_guid
+    account_guid,roomsMessages
   } from "./store.js";
   import {onMount} from 'svelte'
+  import cloneDeep from "lodash.clonedeep";
+  import {get} from 'svelte/store'
   import {KcApi} from "./services/KcApi.js";
   import {Matrix} from "./services/Matrix.js";
   import Messenger from "./lib/components/custom/messenger/Messenger.svelte";
@@ -32,7 +34,7 @@
   let matrix_home_server = null;
   let matrix_user_token = null;
   let kc_user_guid = null;
-  const joinEventsResult = {}
+  let joinEventsResult = {}
 
   let joined_room = []
 
@@ -51,6 +53,7 @@
        await Matrix.cancel()
        await Matrix.logout()
        matrix_token.set('')
+       matrix_since.set('')
 
       return
     }
@@ -80,51 +83,16 @@
       matrix_token.set(get_matrix_token_response.response.matrix_token)
       account_guid.set(get_matrix_token_response.response.account_guid)
     }else{
+      // await Matrix.cancel()
       api_user_guid.set('')
       matrix_user_guid.set('')
       matrix_token.set('')
+      matrix_since.set('')
+      joinEventsResult = {}
+      roomsMessages.set({})
     }
   }
 
-
-
-
-  // onMount( async ()=>{
-  //   let res = await KcApi.getMatrixConfig()
-  //   // res.response
-  //   // res?.response?.url &&
-  //   await matrix_url.set(res.response.url)
-  //
-  //   let tokenM = await KcApi.getMatrixToken()
-  //   // console.log('Matrix Token',tokenM);
-  //
-  //   // if(!!tokenM.response.matrix_token){
-  //   // }
-  //
-  //   await matrix_token.set(tokenM.response.matrix_token)
-  //   // await matrix_token.set('syt_MTc3YWFlNzAtOThhMC01N2E0LTkyZjAtMzk0ZTRiMmVlZWZl_BCHoWwlqIRZJcImsyOKW_4WPEir')
-  //
-  //   await api_user_guid.set(tokenM.response.api_user_guid)
-  //   // await api_user_guid.set('177aae70-98a0-57a4-92f0-394e4b2eeefe')
-  //   if(tokenM.response.matrix_token){
-  //     subscribe()
-  //     checkRoomsEvents(sync.rooms)
-  //     let rooms = await Matrix.joined_rooms()
-  //     joined_chats_rooms.set(rooms['joined_rooms'])
-  //     console.log('Matrix.joined_rooms',rooms);
-  //
-  //     let room_messages = await Matrix.room_messages(rooms['joined_rooms'][1])
-  //     console.log(`room_messages ${rooms['joined_rooms'][1]}`,room_messages);
-  //   }
-  //   // let sync = await Matrix.sync()
-  //   // sync.next_batch && matrix_since.set(sync.next_batch)
-  //   // console.log('response by syncRequest',sync );
-  //   // checkRoomsEvents(sync.rooms)
-  //
-  //
-  //
-  //
-  // })
 
   const subscribe = async()=>{
     if(!$matrix_token){
@@ -181,22 +149,21 @@
     if(rooms && rooms.join){
       for ( let room_id in rooms.join){
 
-        let room_members = Matrix.room_members(room_id)
-        room_members.then(data=> {
-          console.log(`roomMemberrs ${room_id}`, data)
-          joinEventsResult[room_id]['m.room.member'] = [...data?.chunk]
-
-          joinEventsResult[room_id]['m.room.member'].forEach((member)=>{
-            Matrix.user_presence(member.user_id).then((data)=>console.log('userdata', data))
-          })
-
-
-        })
-
-
         if(!joinEventsResult.hasOwnProperty(room_id)){
           joinEventsResult[room_id] = {}
+          // roomsMessages.update((obj)=> obj[room_id] = {})
+          roomsMessages.set({...$roomsMessages, ...{[room_id]: {}} })
         }
+
+        let room_members = Matrix.room_members(room_id)
+        room_members.then(data=> {
+          // console.log(`roomMemberrs ${room_id}`, data)
+          joinEventsResult[room_id]['m.room.member'] = [...data?.chunk]
+            //user status
+          // joinEventsResult[room_id]['m.room.member'].forEach((member)=>{
+          //   Matrix.user_presence(member.user_id).then((data)=>console.log('userdata', data))
+          // })
+        })
 
         let room = rooms.join[room_id]
 
@@ -207,17 +174,9 @@
             joinEventsResult[room_id][event.type].push(event)
           }
 
-          // if(event.type === 'm.room.member') {
-          //   console.log(room_id, event.type, event.state_key)
-          //   if (!joinEventsResult[room_id].hasOwnProperty('members')) {
-          //     joinEventsResult[room_id].members = [event.state_key]
-          //   } else {
-          //     if (!joinEventsResult[room_id].members.includes(event.state_key)) {
-          //       joinEventsResult[room_id].members.push(event.state_key)
-          //     }
-          //   }
-          // }
         })
+
+        const cloneMessages = get(roomsMessages)
 
         room.timeline?.events?.forEach((event)=> {
           if (!joinEventsResult[room_id].hasOwnProperty(event.type)) {
@@ -225,17 +184,23 @@
           } else {
             joinEventsResult[room_id][event.type].push(event)
           }
-          // if (event.type === 'm.room.member') {
-          //   if (!joinEventsResult[room_id].hasOwnProperty('members')) {
-          //     joinEventsResult[room_id].members = [event.state_key]
-          //   }
-          //  else {
-          //   if (!joinEventsResult[room_id].members.includes(event.state_key)) {
-          //     joinEventsResult[room_id].members.push[event.state_key]
-          //     }
-          //   }
-          // }
+          if(event.type === "m.room.message"){
+            if(!cloneMessages[room_id].hasOwnProperty('messages')){
+              cloneMessages[room_id]['messages'] = [event]
+            }else{
+            cloneMessages[room_id]?.['messages'].push(event)
+            }
+              // roomsMessages.update(obj => obj[room_id]['messages'].push(event))
+          }
+          // cloneMessages[room_id]?.['messages'].sort((a,b)=> a.origin_server_ts - b.origin_server_ts)
         })
+
+        cloneMessages[room_id].prev_batch = room.timeline.prev_batch
+
+        console.log('CLONEMESSAGES',cloneMessages);
+        roomsMessages.set({...cloneMessages})
+
+
 
         room.ephemeral?.events?.forEach(()=>{
           // ephermal events handler eg - typing....
@@ -246,6 +211,7 @@
 
       }
     }
+    joinEventsResult = {...joinEventsResult}
 
       console.log('All rooms and events object', joinEventsResult);
 

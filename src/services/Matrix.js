@@ -74,16 +74,16 @@ export const Matrix ={
         return await apiGet(url, options)
     },
 
-    room_messages: async(room_id, limit = 100,)=>{
+    room_messages: async(room_id, limit = 100, from = '' )=>{
         let url = `/_matrix/client/v3/rooms/${room_id}/messages`
 
         _since = get(matrix_since)
-
+        // 's0_0_0_0_0_0_0_0_0'
         let options ={
             params:{
                 dir:'b',
                 limit:limit,
-                from: '',
+                from: from,
                 filter:JSON.stringify({"types": ["m.room.message"]})
             },
             baseUrl: matrixUrl,
@@ -119,9 +119,24 @@ export const Matrix ={
 
         return await apiPut(url, options)
     },
+
     //only for server admin
     get_user_by_id: async(user_id)=>{
         let url= `/_synapse/admin/v2/users/${user_id}`
+
+        const options ={
+            baseUrl: matrixUrl,
+            headers: {
+                'authorization': `Bearer ${matrixToken}`,
+                'Content-Type': 'application/json'
+            }
+        }
+
+        return await apiGet(url,options)
+    },
+
+    get_user_profile: async(user_id)=>{
+        let url= `/_matrix/client/r0/profile/${user_id}`
 
         const options ={
             baseUrl: matrixUrl,

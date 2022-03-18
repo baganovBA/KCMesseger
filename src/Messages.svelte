@@ -8,15 +8,12 @@ import {onMount} from "svelte";
 
 let messageText;
 
-// $:{selected_chat, ()=>{
-//     last_message_id = ''
-// }}
 
 const sendMessage = async ()=>{
-    // <!--for (let i = 0; i < 120; i++) {-->
-    // <!--    await new Promise(async(resolve)=>{-->
-    // <!--        -->
-    // <!--        resolve()-->
+    // for (let i = 0; i < 120; i++) {
+    //     await new Promise(async(resolve)=>{
+    //         await Matrix.send_message($selected_chat, `${i}`)
+    //         resolve()
     //     })
     // }
     await Matrix.send_message($selected_chat, messageText)

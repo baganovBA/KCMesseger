@@ -96,7 +96,7 @@
         {/if}
     </div>
 
-    {#if $joined_chats_rooms.length}
+    {#if $joined_chats_rooms?.length}
         <ul>
             {#each $joined_chats_rooms as room}
                 <li on:click={selected_chat.set(room)} class="chat_name">

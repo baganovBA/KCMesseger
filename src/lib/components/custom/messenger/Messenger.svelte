@@ -13,7 +13,8 @@
   import { IconSend, IconArrowLeft } from '../../icons/icon-pack';
 	import Button from '../../ui/Button.svelte';
   import ChatList from "./ChatList.svelte";
-  import MessageList from "./MessageList.svelte";
+  import InputMessage from "./InputMessage.svelte";
+  import MessageList from "./messages/MessageList.svelte";
 
   //styles
   import '../../../../assets/scss/messenger/messenger.scss'
@@ -26,7 +27,7 @@
 
   // Props
   export let is_active = false;
-  export let chatRoomsData = {};
+  export let chatRoomsData;
 
   // Computed
   $: messageText.length >= 1 ? sendTextButton = false : sendTextButton = true;
@@ -57,12 +58,9 @@
 
         <div class="kc-messenger__contacts-list">
           <ChatList chatRoomsData={chatRoomsData}/>
-
-
         </div>
 
         <div class="kc-messenger__message-wrap">
-
 
           <button class="kc-messenger__back-btn kc-btn kc-btn-default"
                   on:click={() => { showChat = false }}>
@@ -71,17 +69,9 @@
 
           <MessageList chatRoomsData={chatRoomsData} />
 
+          <InputMessage is_active={is_active}/>
 
-          <div class="kc-messenger__message-field">
-            <textarea placeholder="Message to Someone" bind:value={messageText}></textarea>
-            <button
-                    class="kc-btn kc-btn-action messenger-send-btn {sendTextButton ? 'is-disabled' : ''}"
-                    disabled={sendTextButton}>
-              <IconSend/>
-              <!--{$_('app.messenger.send_message', {default: "Send messsage"})}-->
-              Send messsage
-            </button>
-          </div>
+
         </div>
 
       </div>

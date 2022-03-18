@@ -18,6 +18,8 @@
     "vite": "^2.7.2"
   },
   "dependencies": {
-    "faker": "^6.6.6"
+    "dayjs": "^1.11.0",
+    "faker": "^6.6.6",
+    "lodash.clonedeep": "^4.5.0"
   }
 }
