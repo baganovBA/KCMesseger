@@ -22,6 +22,16 @@ export const KcApi ={
         return res
     },
 
+    getMetaData: async()=> {
+       let url =  `/matrix/account/metadata`
+        const res = await apiGet(url, {
+            params: {
+                token: kcToken
+            }
+        })
+        return res
+    },
+
     getMatrixTokenParams: async(kcToken)=>{
         const res = await apiGet('/matrix/token', {params:{
                 token:kcToken

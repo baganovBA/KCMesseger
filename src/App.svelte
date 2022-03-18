@@ -65,6 +65,19 @@
         matrix_url.set(config_response.response?.url)
         matrix_server.set(config_response.response?.homeserver)
       }
+      KcApi.getMetaData().then((data)=>{
+        api_user_guid.set(data.response.api_user_guid)
+        matrix_user_guid.set(data.response.matrix_user_id)
+        matrix_token.set(data.response.matrix_token)
+        account_guid.set(data.response.account_guid)
+      }).catch(()=>{
+        api_user_guid.set('')
+        matrix_user_guid.set('')
+        matrix_token.set('')
+        matrix_since.set('')
+        joinEventsResult = {}
+        roomsMessages.set({})
+      })
     }
 
   }
@@ -78,10 +91,10 @@
         (get_matrix_token_response.code === 200) &&
          get_matrix_token_response.response.matrix_token
       ){
-      api_user_guid.set(get_matrix_token_response.response.api_user_guid)
-      matrix_user_guid.set(get_matrix_token_response.response.matrix_user_id)
+      // api_user_guid.set(get_matrix_token_response.response.api_user_guid)
+      // matrix_user_guid.set(get_matrix_token_response.response.matrix_user_id)
       matrix_token.set(get_matrix_token_response.response.matrix_token)
-      account_guid.set(get_matrix_token_response.response.account_guid)
+      // account_guid.set(get_matrix_token_response.response.account_guid)
     }else{
       // await Matrix.cancel()
       api_user_guid.set('')
