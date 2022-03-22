@@ -12,7 +12,7 @@
     import {selected_chat, roomsMessages, matrix_since} from '/src/store.js'
     import {Matrix} from "/src/services/Matrix.js";
     import {formatDate} from "../../../../helpers/formatDate.js";
-    import {afterUpdate} from "svelte";
+    import {afterUpdate, beforeUpdate} from "svelte";
 
     let messagesData ={}
     let onceIntersectionWorking = true
@@ -34,11 +34,10 @@
     const intersectionCallback = async entry=> {
         if(entry[0].isIntersecting && onceIntersectionWorking){
             onceIntersectionWorking = false
-            console.log(entry[0].target.textContent);
+            console.log('textContent',entry[0].target.textContent);
             observer.unobserve(entry[0].target)
             lat_mess_before_update_id = entry[0].target.id;
-            await getMoreMessages(entry)
-            console.log('onceIntersectionWorking',onceIntersectionWorking)
+            await getMoreMessages()
             onceIntersectionWorking = true
             observer = null;
         }
@@ -46,17 +45,13 @@
 
 
     $:{$roomsMessages; computingMessages(get(roomsMessages))}
-    $:{$selected_chat; lat_mess_before_update_id = get(roomsMessages)[$selected_chat].messages[0].event_id}
+    $:{$selected_chat; lat_mess_before_update_id = $selected_chat && get(roomsMessages)[$selected_chat].messages[0].event_id}
     $:{$selected_chat; observer = null}
 
 
     let start
 const getMoreMessages = async() =>{
         console.log('get More')
-
-    // lat_mess_before_update_id = $roomsMessages[$selected_chat].messages[0].event_id
-    lat_mess_before_update_text = $roomsMessages[$selected_chat].messages[0].content.formatted_body
-
 
     let since = $roomsMessages?.[$selected_chat]?.prev_batch
     if(start){
@@ -72,12 +67,9 @@ const getMoreMessages = async() =>{
         let resultsMessages = [...res_mess.chunk.reverse(), ...$roomsMessages?.[$selected_chat].messages]
         $roomsMessages[$selected_chat].messages = resultsMessages
     }
-
-    console.log(res_mess);
 }
     // selected_chat, roomsMessages
     const computingMessages =(messagesObj)=>{
-        let result
         for (let roomId in messagesObj){
             let room =  messagesObj[roomId]
 
@@ -86,7 +78,6 @@ const getMoreMessages = async() =>{
             room.sorted_messages ={}
 
            room.messages.forEach((message)=>{
-                // message['date'] = dayjs(message.origin_server_ts).format('DD/MM/YYYY')
                 message['date'] = formatDate(message.origin_server_ts,'DD/MM/YYYY')
 
                 if(!room.sorted_messages.hasOwnProperty(message.date)){
@@ -96,36 +87,24 @@ const getMoreMessages = async() =>{
                 }
             })
         }
-        // result = messagesObj
     }
 
     let last_message
     let observer = null
     const viewScroll = async () =>{
 
-        // if(messages_window){
-        //     console.log(messages_window.querySelector('.kc-messenger__message-info'));
-        //     console.log('parentElement clientHeight',messages_window.parentElement.clientHeight);
-        //     console.log('scrollHeight',messages_window.scrollHeight);
-        //     console.log('scrollTop',messages_window.scrollTop);
-        //     console.log('clientHeight',messages_window.clientHeight);
-        //     console.log('clientHeight+ScrollTop',messages_window.clientHeight + messages_window.scrollTop);
-        // }
-
         if(!observer){
             observer = new IntersectionObserver( intersectionCallback, optionsIntersection)
+            last_message = messages_window.querySelector('.kc-messenger__message')
+            console.log('textContent',last_message.textContent);
+            observer.observe(last_message)
         }
-
-        last_message = messages_window.querySelector('.kc-messenger__message')
-        console.log('textContent',last_message.textContent);
-        observer.observe(last_message)
     }
 
     afterUpdate(()=>{
         if(lat_mess_before_update_id){
             let last_message1 = document.getElementById(lat_mess_before_update_id)
-            console.log('last_message',last_message1.offsetHeight,lat_mess_before_update_text, last_message1.lastElementChild.textContent,lat_mess_before_update_id);
-            messages_window.scrollTo(0,last_message1.offsetTop - (last_message1.offsetHeight-20))
+            last_message1.scrollIntoView(true)
             lat_mess_before_update_id = false
         }
     })
