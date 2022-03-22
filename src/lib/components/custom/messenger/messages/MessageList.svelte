@@ -17,13 +17,12 @@
     let messagesData ={}
     let onceIntersectionWorking = true
 
+    let firstOpen
+
     let loading
-
-
-
-
+    
     let messages_window
-    let lat_mess_before_update_id
+    let last_mess_before_update_id
     let lat_mess_before_update_text
 
     const optionsIntersection = {
@@ -36,7 +35,7 @@
             onceIntersectionWorking = false
             console.log('textContent',entry[0].target.textContent);
             observer.unobserve(entry[0].target)
-            lat_mess_before_update_id = entry[0].target.id;
+            last_mess_before_update_id = entry[0].target.id;
             await getMoreMessages()
             onceIntersectionWorking = true
             observer = null;
@@ -45,8 +44,10 @@
 
 
     $:{$roomsMessages; computingMessages(get(roomsMessages))}
-    $:{$selected_chat; lat_mess_before_update_id = $selected_chat && get(roomsMessages)[$selected_chat].messages[0].event_id}
+    $:{$selected_chat; last_mess_before_update_id = $selected_chat && get(roomsMessages)[$selected_chat].messages[0].event_id}
     $:{$selected_chat; observer = null}
+    $:{$selected_chat; firstOpen = true}
+
 
 
     let start
@@ -93,6 +94,8 @@ const getMoreMessages = async() =>{
     let observer = null
     const viewScroll = async () =>{
 
+        firstOpen = false
+
         if(!observer){
             observer = new IntersectionObserver( intersectionCallback, optionsIntersection)
             last_message = messages_window.querySelector('.kc-messenger__message')
@@ -102,10 +105,13 @@ const getMoreMessages = async() =>{
     }
 
     afterUpdate(()=>{
-        if(lat_mess_before_update_id){
-            let last_message1 = document.getElementById(lat_mess_before_update_id)
+        if(firstOpen && messages_window){
+            messages_window.scrollTo(0,messages_window.scrollHeight)
+        }
+        if(last_mess_before_update_id){
+            let last_message1 = document.getElementById(last_mess_before_update_id)
             last_message1.scrollIntoView(true)
-            lat_mess_before_update_id = false
+            last_mess_before_update_id = false
         }
     })
 </script>
