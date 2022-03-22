@@ -1,6 +1,7 @@
 <script>
     import MessageItem from "./MessageItem.svelte";
     import * as dayjs from 'dayjs'
+    import {formatDate} from '/src/lib/helpers/formatDate.js'
     import cloneDeep from "lodash.clonedeep";
 
     export let messagesArray;
@@ -13,13 +14,16 @@
 
 
 {#if messagesArray.length}
-    <span class="kc-messenger__message-date">{dayjs(date).format('dddd, MMMM DD')}</span>
-    {#each messagesArray as message}
+    <div>
+    <span class="kc-messenger__message-date">{formatDate(date, 'dddd, MMMM DD')}</span>
+    {#each messagesArray as message (message.origin_server_ts)}
         <MessageItem
+                ids={message.event_id}
                 img={'/images/dev/userpic-kc.png'}
                 name={message.sender}
                 msg={message.content.formatted_body}
-                time={dayjs(message.origin_server_ts).format('HH:mm')}
+                time={formatDate(message.origin_server_ts, 'HH:mm')}
         />
     {/each}
+    </div>
 {/if}

@@ -12,8 +12,10 @@
     api_user_guid,
     joined_chats_rooms,
     matrix_server, matrix_user_guid,
-    account_guid,roomsMessages
+    account_guid,roomsMessages,
+    time_zone, user_type
   } from "./store.js";
+
   import {onMount} from 'svelte'
   import cloneDeep from "lodash.clonedeep";
   import {get} from 'svelte/store'
@@ -68,7 +70,8 @@
       KcApi.getMetaData().then((data)=>{
         api_user_guid.set(data.response.api_user_guid)
         matrix_user_guid.set(data.response.matrix_user_id)
-        matrix_token.set(data.response.matrix_token)
+        time_zone.set(data.response.timezone)
+        // matrix_token.set(data.response.matrix_token)
         account_guid.set(data.response.account_guid)
       }).catch(()=>{
         api_user_guid.set('')

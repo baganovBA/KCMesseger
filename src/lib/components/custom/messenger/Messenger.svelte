@@ -26,7 +26,7 @@
   let showChat = false;
 
   // Props
-  export let is_active = false;
+  export let is_active;
   export let chatRoomsData;
 
   // Computed
@@ -67,7 +67,7 @@
             <IconArrowLeft/>Back to contacts
           </button>
 
-          <MessageList chatRoomsData={chatRoomsData} />
+          <MessageList chatRoomsData={chatRoomsData}  />
 
           <InputMessage is_active={is_active}/>
 

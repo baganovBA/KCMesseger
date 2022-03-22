@@ -40,7 +40,6 @@ const getRoomMessages = async (entry) => {
     }
 }
 const virtualScroll =async ()=>{
-
     await tick();
     const observer = new IntersectionObserver(entry=> {
         getRoomMessages(entry)
@@ -59,6 +58,7 @@ beforeUpdate(() => {
 });
 
 afterUpdate(()=>{
+
     if(last_message_id){
         let last_message = document.getElementById(last_message_id)
         console.log('last_message',last_message.offsetHeight, last_message.offsetTop);

@@ -1,4 +1,4 @@
-<div class="kc-messenger__message">
+<div class="kc-messenger__message" id={ids} >
   <div class="kc-messenger__message-avatar">
     <img src="{img}" alt="">
   </div>
@@ -17,4 +17,6 @@
   export let name:string;
   export let msg:string;
   export let time:string;
+  export let ids:string;
+
 </script>
