@@ -168,7 +168,7 @@
         if(!joinEventsResult.hasOwnProperty(room_id)){
           joinEventsResult[room_id] = {}
           // roomsMessages.update((obj)=> obj[room_id] = {})
-          roomsMessages.set({...$roomsMessages, ...{[room_id]: {}} })
+          roomsMessages.set({...$roomsMessages, ...{[room_id]: {start_next_batch:'', scroll_to_element:''} } })
         }
 
         let room_members = Matrix.room_members(room_id)
@@ -214,7 +214,6 @@
         cloneMessages[room_id].prev_batch = room.timeline.prev_batch
 
         console.log('CLONEMESSAGES',cloneMessages);
-        roomsMessages.set({...cloneMessages})
 
 
 
@@ -223,7 +222,8 @@
         })
 
         joinEventsResult[room_id]['new_messages'] = room?.['unread_notifications']?.['notification_count'] ?? 0
-
+        cloneMessages[room_id]['new_messages'] = room?.['unread_notifications']?.['notification_count'] ?? 0
+        roomsMessages.set({...cloneMessages})
 
       }
     }

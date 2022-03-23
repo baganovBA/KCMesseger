@@ -1,6 +1,5 @@
 <script>
     import MessageItem from "./MessageItem.svelte";
-    import * as dayjs from 'dayjs'
     import {formatDate} from '/src/lib/helpers/formatDate.js'
     import cloneDeep from "lodash.clonedeep";
 
