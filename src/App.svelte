@@ -12,8 +12,8 @@
     api_user_guid,
     joined_chats_rooms,
     matrix_server, matrix_user_guid,
-    account_guid,roomsMessages,
-    time_zone, user_type
+    account_guid, roomsMessages,
+    time_zone, user_type, messages_is_changed
   } from "./store.js";
 
   import {onMount} from 'svelte'
@@ -226,6 +226,7 @@
         roomsMessages.set({...cloneMessages})
 
       }
+      $messages_is_changed = !$messages_is_changed
     }
     joinEventsResult = {...joinEventsResult}
 

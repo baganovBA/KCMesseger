@@ -25,18 +25,18 @@ let onceWorking = true
 const getRoomMessages = async (entry) => {
     // if(entry[0].isIntersecting === joinEventsResult[$selected_chat]['m.room.message'][0].event_id){
     if(entry[0].isIntersecting && onceWorking){
-        onceWorking = false
-        limit +=20
-        const res_mess = await Matrix.room_messages($selected_chat, limit)
-        console.log('res_mess',res_mess)
-        console.log('joinEventsResult[$selected_chat]',joinEventsResult[$selected_chat])
-        last_message_id = joinEventsResult[$selected_chat]['m.room.message'][0].event_id
-        console.log('last_message_id BODY',joinEventsResult[$selected_chat]['m.room.message'][0].content.body);
-        if(res_mess?.chunk?.length > 0){
-            res_mess['chunk'].reverse()
-            joinEventsResult[$selected_chat]['m.room.message'] = [...res_mess['chunk']]
-        }
-        onceWorking = true
+        // onceWorking = false
+        // limit +=20
+        // const res_mess = await Matrix.room_messages($selected_chat, limit)
+        // console.log('res_mess',res_mess)
+        // console.log('joinEventsResult[$selected_chat]',joinEventsResult[$selected_chat])
+        // last_message_id = joinEventsResult[$selected_chat]['m.room.message'][0].event_id
+        // console.log('last_message_id BODY',joinEventsResult[$selected_chat]['m.room.message'][0].content.body);
+        // if(res_mess?.chunk?.length > 0){
+        //     res_mess['chunk'].reverse()
+        //     joinEventsResult[$selected_chat]['m.room.message'] = [...res_mess['chunk']]
+        // }
+        // onceWorking = true
     }
 }
 const virtualScroll =async ()=>{

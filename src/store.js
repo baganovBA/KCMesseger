@@ -13,6 +13,7 @@ export const matrix_since = writable('')
 export const time_zone = writable('')
 export const user_type = writable('')
 export const timeout = writable(60000)
+export const messages_is_changed = writable(false)
 
 export const selected_chat =writable('')
 

@@ -15,7 +15,7 @@
 {#if messagesArray.length}
     <div>
     <span class="kc-messenger__message-date">{formatDate(date, 'dddd, MMMM DD')}</span>
-    {#each messagesArray as message (message.origin_server_ts)}
+    {#each messagesArray as message}
         <MessageItem
                 ids={message.event_id}
                 img={'/images/dev/userpic-kc.png'}
